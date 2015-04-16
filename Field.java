@@ -1,42 +1,66 @@
-
+package ru.ifmo.ketov;
 // i - координата Y
 // j - координата X
-//  import java.util.concurrent.ExecutionException;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Field {
+    public static final HashMap<String, Integer> columnIndexes = new HashMap<String, Integer>();
 
-    Task task;
+    static {
+        columnIndexes.put("A", 1);
+        columnIndexes.put("B", 2);
+        columnIndexes.put("C", 3);
+        columnIndexes.put("D", 4);
+        columnIndexes.put("E", 5);
+        columnIndexes.put("F", 6);
+        columnIndexes.put("G", 7);
+        columnIndexes.put("H", 8);
+    }
+
+    public static final HashMap<Integer, String> columnNames = new HashMap<Integer, String>();
+
+    static {
+        columnNames.put(1, "A");
+        columnNames.put(2, "B");
+        columnNames.put(3, "C");
+        columnNames.put(4, "D");
+        columnNames.put(5, "E");
+        columnNames.put(6, "F");
+        columnNames.put(7, "G");
+        columnNames.put(8, "H");
+    }
+
 
     // размер поля
     int n = 9;
     // массив для поля
     Figure[][] field;
-
-//    int[] m = {"A", "B", };
-
-
+    Window myWindow;
 
 
     // конструктор, который строит поле
-    Field(Task task) {
-        this.task = task;
-        field = new Figure[n][n];
+    Field(HashMap<Cell, Figure> startConfig) {
+        this.field = new Figure[n][n];
 
         for (int i = 1; i < n; i++) {
             for (int j = 1; j < n; j++) {
                 field[i][j] = new Figure();
             }
         }
-        // фигуры для теста ходов
-        setCell(new Cell(2, 2), new Figure(Figure.Side.Black, Figure.Type.King));
-        setCell(new Cell(2, 1), new Figure(Figure.Side.White, Figure.Type.Pawn));
-        setCell(new Cell(5, 5), new Figure(Figure.Side.Black, Figure.Type.Pawn));
-        setCell(new Cell(3, 3), new Figure(Figure.Side.Black, Figure.Type.Rook));
-        setCell(new Cell(8, 8), new Figure(Figure.Side.Black, Figure.Type.Elephant));
-        setCell(new Cell(6, 3), new Figure(Figure.Side.Black, Figure.Type.Horse));
-        setCell(new Cell(2, 7), new Figure(Figure.Side.Black, Figure.Type.Queen));
 
+        for (Iterator<HashMap.Entry<Cell, Figure>> it = startConfig.entrySet().iterator(); it.hasNext(); ) {
+            HashMap.Entry<Cell, Figure> entry = it.next();
+            setCell(entry.getKey(), entry.getValue());
+        }
 
+        myWindow = new Window(this);
+        myWindow.setVisible(true);
+    }
+
+    Figure getFigure(int i, int j) {
+        return field[i][j];
     }
 
     // методы задания и получения значения ячейки поля
@@ -44,29 +68,55 @@ public class Field {
         field[cell.i][cell.j] = figure;
     }
 
-    //проверка на правильность
-    public boolean step(Cell from, Cell to) {
-        if (!field[from.i][from.j].checkStep(from, to)) {
-            throw new RuntimeException("step error");
-        }
-
-        field[to.i][to.j] =  field[from.i][from.j];
-        field[from.i][from.j] = new Figure();
-        if (task.check(from, to)) {
-            System.out.println("Правильно");
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // метод возвращает значение ячейки, вдруг понадобится
+    // метод возвращает значение ячейки
     Figure cellType(int i, int j) {
         return field[i][j];
     }
 
+
+    public Figure createFigure (Figure.Type type) {
+        switch (type) {
+            case Pawn: {
+                return new FigurePawn();
+            }
+            case King: {
+                return new FigureKing();
+            }
+            case Queen: {
+                return new FigureQueen();
+            }
+            case Horse: {
+                return new FigureHorse();
+            }
+            case Elephant: {
+                return new FigureElephant();
+            }
+            case Rook: {
+                return new FigureRook();
+            }
+            case Null: {
+                return new FigureNull();
+            }
+
+        }
+
+        return new Figure();
+
+    }
+
+    public void makeStep(Cell from, Cell to) {
+        field[to.i][to.j] = field[from.i][from.j];
+        field[from.i][from.j] = createFigure(Figure.Type.Null);
+    }
+
+    public void updateWindow() {
+        myWindow.update();
+    }
+
+
     // выводим текущее игровое поле
     void printField() {
+
         System.out.print("# ");
         System.out.print("A ");
         System.out.print("B ");
