@@ -89,7 +89,7 @@ public class Field {
                 return new FigureRook(side);
             }
             case Null: {
-                return new FigureNull();
+                return new FigureNull(side);
             }
         }
 
@@ -97,9 +97,13 @@ public class Field {
     }
 
     public void makeStep(Cell from, Cell to) throws Exception {
-        if (field[from.i][from.j].type != Figure.Type.Null
+        if (
+                field[from.i][from.j].type != Figure.Type.Null
                 && !(from.i == to.i && from.j == to.j)
-                && field[from.i][from.j].checkStep(from, to)) {
+                && field[from.i][from.j].checkStep(from, to) &&
+                (field[to.i][to.j].side != field[from.i][from.j].side)
+
+                ){
             field[to.i][to.j] = field[from.i][from.j];
             field[from.i][from.j] = createFigure(Figure.Side.Null, Figure.Type.Null);
         } else {

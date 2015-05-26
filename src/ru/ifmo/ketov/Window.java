@@ -60,9 +60,9 @@ public class Window extends JFrame {
 
                 if (i != 0 && j != 0) {
                     if ((i + j) % 2 == 0) {
-                        buttons[i][j].setBackground(new Color(88, 84, 32));
+                        buttons[i][j].setBackground(new Color(221, 226, 121));
                     } else {
-                        buttons[i][j].setBackground(new Color(202, 226, 127));
+                        buttons[i][j].setBackground(new Color(198, 105, 0));
                         buttons[i][j].setForeground(new Color(255, 248, 253));
                     }
                 }
@@ -75,7 +75,7 @@ public class Window extends JFrame {
     }
 
     public void changeComboBox(Task newTask) {
-        textMessage.setText("Выбрана задача \"" + newTask.toString() + "\". " + newTask.message);
+        textMessage.setText("\"" + newTask.toString() + "\". " + newTask.message);
         commander.setTask(newTask);
         update();
     }

@@ -8,6 +8,6 @@ public class FigureRook extends Figure {
     }
 
     public boolean checkStep(Cell from, Cell to) {
-        return from.j == to.j || from.i == to.i;
+        return (from.j == to.j || from.i == to.i );
     }
 }

@@ -46,9 +46,15 @@ public class Task1 extends Task {
         startConfig.put(new Cell(1, 4), new FigureConfig(Figure.Side.Black, Figure.Type.Queen));
     }
 
+
     public boolean check() {
-        return (field.getFigure(2, 4).type == Figure.Type.King)
-                && (field.getFigure(2,4).side == Figure.Side.Black);
+        if ((field.getFigure(2, 4).type == Figure.Type.King)
+                && (field.getFigure(2, 4).side == Figure.Side.Black)) {
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     String getTaskMessage() {

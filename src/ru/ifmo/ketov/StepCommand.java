@@ -48,7 +48,7 @@ public class StepCommand implements Command {
             window.setButtonBorder(startCell, 0);
             window.update();
             if (task.check()) {
-                window.textMessage.setText("Вы выполнили задание!");
+                window.textMessage.setText("Вы выполнили задание! Выберите другое");
             }
 
             startCell = null;

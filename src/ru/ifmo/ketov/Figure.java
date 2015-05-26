@@ -8,6 +8,7 @@ public class Figure {
 
     Side side;
     Type type;
+    Field field;
 
     Figure() {
         side = Side.Null;
@@ -20,6 +21,6 @@ public class Figure {
     }
 
     public boolean checkStep(Cell from, Cell to) {
-        return true;
+        return (true);
     }
 }

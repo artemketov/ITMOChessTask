@@ -10,6 +10,7 @@ public class Task {
     String name;
     String message;
     HashMap<Cell, FigureConfig> startConfig;
+//    int t = 0;
 
     static final class FigureConfig {
         Figure.Side side;

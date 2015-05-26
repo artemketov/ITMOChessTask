@@ -2,8 +2,8 @@ package ru.ifmo.ketov;
 
 public class FigureNull extends Figure {
 
-    FigureNull() {
-        this.side = Side.Null;
+    FigureNull(Side side) {
+        this.side = side;
         this.type = Type.Null;
     }
 
