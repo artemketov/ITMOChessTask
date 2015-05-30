@@ -6,8 +6,10 @@ import java.util.Scanner;
 
 public class Task {
 
+    Window window;
     Field field;
     String name;
+    int count;
     String message;
     HashMap<Cell, FigureConfig> startConfig;
 //    int t = 0;
@@ -22,8 +24,16 @@ public class Task {
         }
     }
 
-    public Task () {
+    String getTaskMessage() {
+        return message;
+    }
 
+    public Task() {
+
+    }
+
+    public int counter() {
+        return count;
     }
 
     public void run() {
@@ -31,9 +41,12 @@ public class Task {
     }
 
     public boolean check() {
+
         return true;
     }
-    @Override public String toString() {
+
+    @Override
+    public String toString() {
         return name;
     }
 

@@ -11,6 +11,7 @@ public class Task2 extends Task {
         name = config;
         setConfig();
         message = getTaskMessage();
+        count = 1;
     }
 
     public void setConfig() {
@@ -47,8 +48,16 @@ public class Task2 extends Task {
     }
 
     public boolean check() {
-        return ((field.getFigure(3, 3).type == Figure.Type.Elephant)
-                && (field.getFigure(3,3).side == Figure.Side.Black));
+        if (((field.getFigure(3, 3).type == Figure.Type.Elephant)
+                && (field.getFigure(3, 3).side == Figure.Side.Black))) {
+
+            return true;
+
+        }
+        else {
+
+            return false;
+        }
     }
 
     String getTaskMessage() {

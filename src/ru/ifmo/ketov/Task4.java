@@ -11,6 +11,7 @@ public class Task4 extends Task {
         name = config;
         setConfig();
         message = getTaskMessage();
+        count = 1;
     }
 
     public void setConfig() {

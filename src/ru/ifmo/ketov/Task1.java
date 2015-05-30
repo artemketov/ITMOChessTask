@@ -11,6 +11,7 @@ public class Task1 extends Task {
         name = config;
         setConfig();
         message = getTaskMessage();
+        count = 1000;
     }
 
     public void setConfig() {
@@ -48,14 +49,9 @@ public class Task1 extends Task {
 
 
     public boolean check() {
-        if ((field.getFigure(2, 4).type == Figure.Type.King)
-                && (field.getFigure(2, 4).side == Figure.Side.Black)) {
-
-            return true;
-        } else {
             return false;
         }
-    }
+
 
     String getTaskMessage() {
         return "Выберите задание";
